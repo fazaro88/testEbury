@@ -1,0 +1,31 @@
+@import './variables';
+
+body {
+    background-color: $body-background-color !important;
+    font-family: $font-family;
+}
+
+h1 {
+    font-size: $h1 !important;
+    font-weight: lighter !important;
+}
+
+h2 {
+    font-size: $h2 !important;
+    font-weight: lighter !important;
+}
+
+h3 {
+    font-size: $h3 !important;
+    font-weight: lighter !important;
+}
+
+h4 {
+    font-size: $h4 !important;
+    font-weight: lighter !important;
+}
+
+h5 {
+    font-size: $h5 !important;
+    font-weight: lighter !important;
+}

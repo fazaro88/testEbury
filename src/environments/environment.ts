@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
     title: 'Test Ebury',
-    language: 'es',
+    language: 'en',
     i18n: './assets/i18n/'
 };

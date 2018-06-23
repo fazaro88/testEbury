@@ -1,3 +1,9 @@
 {
-    
+    "SEND_EMAIL": "Enviar E-mail",
+    "TO": "Para",
+    "CC": "CC",
+    "BCC": "BCC",
+    "SUBJECT": "Asunto",
+    "MESSAGE": "Mensaje",
+    "SEND": "Enviar"
 }
