@@ -1,25 +1,32 @@
 <div class="container">
     <div class="containerForm">
         <h5 class="titleForm p-3 m-0">{{ 'SEND_EMAIL' | translate }}</h5>
-        <form class="backgroundForm p-4"> 
+        <form [formGroup]="emailForm" class="backgroundForm p-4"> 
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="{{ 'TO' | translate }}">
+                <input formControlName="to" class="form-control" placeholder="{{ 'TO' | translate }}">
             </div>
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="{{ 'CC' | translate }}">
+                <input formControlName="cc" class="form-control" placeholder="{{ 'CC' | translate }}">
             </div>
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="{{ 'BCC' | translate }}">
+                <input formControlName="bcc" class="form-control" placeholder="{{ 'BCC' | translate }}">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="{{ 'SUBJECT' | translate }}">
+                <input formControlName="subject" class="form-control" placeholder="{{ 'SUBJECT' | translate }}">
             </div>
             <div class="form-group">
-                <textarea class="form-control" placeholder="{{ 'MESSAGE' | translate }}" rows="3"></textarea>
+                <textarea formControlName="message" class="form-control" placeholder="{{ 'MESSAGE' | translate }}" rows="3"></textarea>
+            </div>
+            <div class="card-group" *ngIf="images.length > 0">
+                <div *ngFor="let img of images; let pos=index;" class="card">
+                    <img class="card-img" src="{{img}}">
+                    <div class="card-img-overlay">{{pos}}</div>
+                </div>
             </div>
             <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-outline-secondary buttonAttachForm"><i class="fa fa-paperclip"></i></button>
-                <button type="submit" class="btn buttonSendForm" disabled><i class="fa fa-arrow-right"></i> {{ 'SEND' | translate }}</button>
+                <input hidden type="file" #uploader multiple accept='image/*' (change)="uploadFile($event)"/>
+                <button (click)="uploader.click()" class="btn btn-outline-secondary buttonAttachForm"><i class="fa fa-paperclip"></i></button>
+                <button type="submit" class="btn buttonSendForm" [disabled]="emailForm.invalid"><i class="fa fa-arrow-right"></i> {{ 'SEND' | translate }}</button>
             </div>
         </form>
     </div>
