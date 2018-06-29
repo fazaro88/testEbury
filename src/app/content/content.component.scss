@@ -33,3 +33,7 @@
     color: $button-send-font-disabled !important;
     background-color: $button-send-disabled !important;
 }
+
+form .ng-invalid.ng-touched.ng-dirty {
+    border: 1px solid red;
+}
