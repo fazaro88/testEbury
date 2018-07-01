@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, MaxLengthValidator } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-content',
@@ -10,6 +11,7 @@ export class ContentComponent implements OnInit {
 
     public emailForm: FormGroup;
     public images: Array<any>;
+    public showEmail: boolean;
     private EMAILS_REGEX = /^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]{2,4}\s*?,?\s*?)+$/;
     private MAX_SUBJECT = 100;
 
@@ -17,7 +19,8 @@ export class ContentComponent implements OnInit {
 
     ngOnInit() {
         this.createForm();
-        this.images = [];
+        _.set(this, 'showEmail', false);
+        _.set(this, 'images', []);
     }
 
     private createForm() {
@@ -31,13 +34,23 @@ export class ContentComponent implements OnInit {
     }
 
     public uploadFile(event) {
-        if (event.target.files && event.target.files[0]) {
-            const reader = new FileReader();
-            reader.readAsDataURL(event.target.files[0]);
-            reader.onload = (e) => {
-                this.images.push(e.target.result);
-            };
+        _.set(this, 'images', []);
+        if (!_.isNil(event.target.files)) {
+            _.forEach(event.target.files, (file: any) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (e) => {
+                    this.images.push(e.target.result);
+                };
+            });
         }
     }
 
+    public removeFile(pos: number) {
+        this.images.splice(pos, 1);
+    }
+
+    public sendEmail() {
+        _.set(this, 'showEmail', true);
+    }
 }

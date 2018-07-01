@@ -3,9 +3,9 @@
 .containerForm {  
     position: absolute;
     top: 25%;
-    left: 40%;
-    min-width: $form-size;
-    min-height: $form-size;
+    left: 33%;
+    width: $form-size;
+    height: $form-size;
 }
 
 .titleForm {
@@ -34,6 +34,40 @@
     background-color: $button-send-disabled !important;
 }
 
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    color: $white !important;
+    border-radius: 50%;
+    background-color: $button-send-font-disabled;
+}
+
+.card:hover img {
+    opacity: 0.3;
+}
+  
+.card:hover .middle {
+    opacity: 1;
+}
+
+.card {
+    max-width: 100px;
+    height: auto;
+}
+
 form .ng-invalid.ng-touched.ng-dirty {
-    border: 1px solid red;
+    border: 1px solid $error;
+}
+
+.iconSuccess {
+    color: $success;
+}
+
+.email {
+    color: $button-send-normal;
 }

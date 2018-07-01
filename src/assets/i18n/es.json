@@ -5,5 +5,7 @@
     "BCC": "BCC",
     "SUBJECT": "Asunto",
     "MESSAGE": "Mensaje",
-    "SEND": "Enviar"
+    "SEND": "Enviar",
+    "ATTACHED_FILES": "Ficheros adjuntos",
+    "SEND_SUCCESS": "Tu email se ha enviado"
 }

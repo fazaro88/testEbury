@@ -1,33 +1,57 @@
 <div class="container">
     <div class="containerForm">
-        <h5 class="titleForm p-3 m-0">{{ 'SEND_EMAIL' | translate }}</h5>
-        <form [formGroup]="emailForm" class="backgroundForm p-4"> 
-            <div class="form-group">
-                <input formControlName="to" class="form-control" placeholder="{{ 'TO' | translate }}">
+        <div *ngIf="!showEmail">
+            <h5 class="titleForm p-3 m-0">{{ 'SEND_EMAIL' | translate }}</h5>
+            <form [formGroup]="emailForm" class="backgroundForm p-4"> 
+                <div class="form-group">
+                    <input formControlName="to" class="form-control" placeholder="{{ 'TO' | translate }}">
+                </div>
+                <div class="form-group">
+                    <input formControlName="cc" class="form-control" placeholder="{{ 'CC' | translate }}">
+                </div>
+                <div class="form-group">
+                    <input formControlName="bcc" class="form-control" placeholder="{{ 'BCC' | translate }}">
+                </div>
+                <div class="form-group">
+                    <input formControlName="subject" class="form-control" placeholder="{{ 'SUBJECT' | translate }}">
+                </div>
+                <div class="form-group">
+                    <textarea formControlName="message" class="form-control" placeholder="{{ 'MESSAGE' | translate }}" rows="3"></textarea>
+                </div>
+                <div *ngIf="images.length > 0">
+                    {{ 'ATTACHED_FILES' | translate }}
+                    <div class="card-group">
+                        <div *ngFor="let img of images; let pos=index;" class="card m-2">
+                            <img class="card-img" src="{{img}}">
+                            <div class="card-img-overlay">
+                                <button (click)="removeFile(pos)" class="btn btn-outline-secondary middle"><i class="fa fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <input hidden type="file" #uploader multiple accept='image/*' (change)="uploadFile($event)"/>
+                    <button (click)="uploader.click()" class="btn btn-outline-secondary buttonAttachForm"><i class="fa fa-paperclip"></i></button>
+                    <button (click)="sendEmail()" type="submit" [disabled]="emailForm.invalid" class="btn buttonSendForm"><i class="fa fa-arrow-right"></i> {{ 'SEND' | translate }}</button>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="showEmail" class="backgroundForm p-4">
+            <div class="text-center">
+                <i class="fa fa-check-circle fa-5x iconSuccess w-100"></i>
+                <p>{{ 'SEND_SUCCESS' | translate }}</p>
             </div>
-            <div class="form-group">
-                <input formControlName="cc" class="form-control" placeholder="{{ 'CC' | translate }}">
-            </div>
-            <div class="form-group">
-                <input formControlName="bcc" class="form-control" placeholder="{{ 'BCC' | translate }}">
-            </div>
-            <div class="form-group">
-                <input formControlName="subject" class="form-control" placeholder="{{ 'SUBJECT' | translate }}">
-            </div>
-            <div class="form-group">
-                <textarea formControlName="message" class="form-control" placeholder="{{ 'MESSAGE' | translate }}" rows="3"></textarea>
-            </div>
-            <div class="card-group" *ngIf="images.length > 0">
-                <div *ngFor="let img of images; let pos=index;" class="card">
-                    <img class="card-img" src="{{img}}">
-                    <div class="card-img-overlay">{{pos}}</div>
+            <hr>
+            <h4 class="text-left">{{emailForm.value.subject}}</h4>
+            <p class="text-left">{{ 'TO' | translate }} <span class="email">{{emailForm.value.to}}</span></p>
+            <p class="text-left">{{emailForm.value.message}}</p>
+            <div *ngIf="images.length > 0">
+                <div class="card-group">
+                    <div *ngFor="let img of images;" class="card m-2">
+                        <img class="card-img" src="{{img}}">
+                    </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-between">
-                <input hidden type="file" #uploader multiple accept='image/*' (change)="uploadFile($event)"/>
-                <button (click)="uploader.click()" class="btn btn-outline-secondary buttonAttachForm"><i class="fa fa-paperclip"></i></button>
-                <button type="submit" class="btn buttonSendForm" [disabled]="emailForm.invalid"><i class="fa fa-arrow-right"></i> {{ 'SEND' | translate }}</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
