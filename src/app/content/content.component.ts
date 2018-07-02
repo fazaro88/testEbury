@@ -39,7 +39,7 @@ export class ContentComponent implements OnInit {
             _.forEach(event.target.files, (file: any) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onload = (e) => {
+                reader.onload = (e: any) => {
                     this.images.push(e.target.result);
                 };
             });
